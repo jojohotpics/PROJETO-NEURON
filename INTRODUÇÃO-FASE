@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJETO NEURON | Enigma</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #ffffff;
+            --text-dim: #888888;
+            --glitch-speed: 0.3s;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- TELA DE ENTRADA --- */
+        #home-screen {
+            text-align: center;
+            transition: opacity 1s ease;
+        }
+
+        .title {
+            font-size: 3rem;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .credits {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+        }
+
+        .quote {
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .btn-play {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 15px 40px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 5px;
+            transition: all 0.4s;
+        }
+
+        .btn-play:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        /* --- TELA DO ENIGMA --- */
+        #enigma-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .level-image {
+            max-width: 80%;
+            max-height: 400px;
+            border: 1px solid #333;
+            filter: grayscale(100%);
+            margin-bottom: 30px;
+            transition: filter 0.5s;
+        }
+
+        .level-image:hover {
+            filter: grayscale(0%);
+        }
+
+        .input-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            background: none;
+            border: none;
+            border-bottom: 1px solid #333;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            padding: 10px;
+            width: 300px;
+            text-align: center;
+            outline: none;
+            transition: border-bottom 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 0.7rem;
+            height: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Efeito de Scanline */
+        body::before {
+            content: " ";
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="home-screen">
+        <div class="title">NEURON.SYS</div>
+        <div class="credits">BY SEU NOME</div>
+        <div class="quote">
+            "A mente que se abre a uma nova ideia jamais retornará ao seu tamanho original."
+        </div>
+        <button class="btn-play" onclick="startGame()">JOGAR</button>
+    </div>
+
+    <div id="enigma-screen">
+        <img src="https://via.placeholder.com/600x400/111/fff?text=A+VERDADE+ESTA+ESCONDIDA" alt="Enigma Image" class="level-image">
+        
+        <div class="input-container">
+            <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">
+        </div>
+        <div class="feedback" id="feedback">Aguardando entrada...</div>
+    </div>
+
+    <script>
+        // Configurações do Enigma
+        const CORRECT_ANSWER = "silencio"; // Troque aqui a resposta (minúsculo)
+
+        function startGame() {
+            const home = document.getElementById('home-screen');
+            const enigma = document.getElementById('enigma-screen');
+
+            home.style.opacity = '0';
+            setTimeout(() => {
+                home.style.display = 'none';
+                enigma.style.display = 'flex';
+                setTimeout(() => {
+                    enigma.style.opacity = '1';
+                }, 100);
+            }, 1000);
+        }
+
+        const input = document.getElementById('answerInput');
+        const feedback = document.getElementById('feedback');
+
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        function checkAnswer() {
+            const userAnswer = input.value.toLowerCase().trim();
+            
+            if (userAnswer === CORRECT_ANSWER) {
+                feedback.style.color = "#00ff00";
+                feedback.innerText = "ACESSO CONCEDIDO. VOCÊ VENCEU.";
+                input.disabled = true;
+                document.querySelector('.level-image').style.filter = "grayscale(0%) brightness(1.2)";
+            } else {
+                feedback.style.color = "#ff0000";
+                feedback.innerText = "ACESSO NEGADO. TENTE NOVAMENTE.";
+                // Pequeno efeito de tremor (opcional)
+                input.style.borderBottomColor = "#ff0000";
+                setTimeout(() => {
+                    input.style.borderBottomColor = "#333";
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -156,9 +156,8 @@
         <div class="input-container">
             <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">
         </div>
-        <div class="feedback" id="feedback">Aguardando entrada...</div>
+        <div class="feedback" id="feedback">Aguardando entrada...<p style="color: black;">Menor que 63 e também não maior que 64</p></div>
     </div>
-
     <script>
         const CORRECT_ANSWER = "silencio"; 
 

@@ -148,7 +148,8 @@
     </div>
 
     <div id="enigma-screen">
-        <img src="https://via.placeholder.com/600x400/111/fff?text=A+VERDADE+ESTA+ESCONDIDA" alt="Enigma Image" class="level-image">
+        <img src="Dante-Alighieri.jpeg" alt="Descrição" width="300" height="200">
+
         
         <div class="input-container">
             <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">

@@ -151,7 +151,7 @@
     </div>
 
     <div id="enigma-screen">
-        <img src="Dante-Alighieri.jpeg" alt="file:///C:/Users/aluno/Desktop/Nova%20pasta%20(4)/Untitled-2.html" class="level-image">
+        <img src="Primeiro-dos-cantos.jpeg" alt="file:///C:/Users/aluno/Desktop/Nova%20pasta%20(4)/Untitled-2.html" class="level-image">
         
         <div class="input-container">
             <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">

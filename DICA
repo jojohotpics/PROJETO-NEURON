@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Secreta</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .conteudo-visivel {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Esta classe esconde o texto de forma que ele ainda exista no HTML, 
+           mas não seja visível ou selecionável facilmente */
+        .texto-oculto {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+            color: transparent;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="conteudo-visivel">
+        <h1>Bem-vindo ao Site</h1>
+        <p>Não há nada de estranho por aqui... ou há?</p>
+    </div>
+
+    <div class="texto-oculto">
+        po4QIgVGe5lVPIPY+PIBGsu4j6j8AZdYaBr65yqpi8HvaGdFKj8r58NxjPZd2IOXRvtyr9C6LQQtnbc2Ji/Nr7AtKQQaRCznINtn3l0O+FN61zp9EKCvbXwNB6mW1JnF9lhORMSOoilSjAcdayzwOyZmohmHwphG9L+lAByJNE0P9HHQR9iDtXzJiYHlq97xMK0yBP4uiNpkEuv67CI61VPBLC0IIuBj5lxBBVP2efOGUldkaXFD0lOKfBDtfC7QLHXfiBJWRqsYWjjUMzVXbimxzPYIaSNpoO442PRITn3qcwDME3zzIXCPUQ2NZgbeV0e5UVznjv6vAyCO+zgAPl2bM1QJ6pPL9V4XyScEDl8=
+    </div>
+
+</body>
+</html>

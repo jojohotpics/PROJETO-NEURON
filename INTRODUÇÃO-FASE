@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- ⠍⠊⠝⠓⠁ ⠋⠕⠗⠍⠁ ⠙⠑ ⠑⠍⠃⠁⠗⠁⠇⠓⠁⠗ ⠕ ⠞⠑⠭⠞⠕ ⠑⠎ ⠍⠊⠝⠓⠁ ⠋⠁⠧⠕⠗⠊⠞⠁ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROJETO NEURON | Enigma</title>
@@ -150,7 +151,7 @@
     </div>
 
     <div id="enigma-screen">
-        <img src="Dante-Alighieri.jpeg" alt="Enigma" class="level-image">
+        <img src="Dante-Alighieri.jpeg" alt="file:///C:/Users/aluno/Desktop/Nova%20pasta%20(4)/Untitled-2.html" class="level-image">
         
         <div class="input-container">
             <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">

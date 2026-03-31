@@ -32,15 +32,15 @@
         }
 
         .title {
-            font-size: 3rem;
-            letter-spacing: 15px;
+            font-size: 2.5rem;
+            letter-spacing: 10px;
             text-transform: uppercase;
             margin-bottom: 10px;
             text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         .credits {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-dim);
             letter-spacing: 3px;
             margin-bottom: 50px;
@@ -52,6 +52,7 @@
             margin: 0 auto 40px;
             line-height: 1.6;
             color: #ccc;
+            padding: 0 20px;
         }
 
         .btn-play {
@@ -78,6 +79,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 1s ease;
+            width: 100%;
         }
 
         .level-image {
@@ -86,7 +88,7 @@
             border: 1px solid #333;
             filter: grayscale(100%);
             margin-bottom: 30px;
-            transition: filter 0.5s;
+            transition: all 0.5s;
         }
 
         .level-image:hover {
@@ -105,7 +107,7 @@
             color: var(--accent-color);
             font-size: 1.2rem;
             padding: 10px;
-            width: 300px;
+            width: 280px;
             text-align: center;
             outline: none;
             transition: border-bottom 0.3s;
@@ -129,7 +131,7 @@
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
             z-index: 100;
@@ -148,8 +150,7 @@
     </div>
 
     <div id="enigma-screen">
-        <img src="Dante-Alighieri.jpeg" alt="Descrição" width="300" height="200">
-
+        <img src="Dante-Alighieri.jpeg" alt="Enigma" class="level-image">
         
         <div class="input-container">
             <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">
@@ -158,8 +159,7 @@
     </div>
 
     <script>
-        // Configurações do Enigma
-        const CORRECT_ANSWER = "silencio"; // Troque aqui a resposta (minúsculo)
+        const CORRECT_ANSWER = "silencio"; 
 
         function startGame() {
             const home = document.getElementById('home-screen');
@@ -186,16 +186,18 @@
 
         function checkAnswer() {
             const userAnswer = input.value.toLowerCase().trim();
+            const levelImg = document.querySelector('.level-image');
             
             if (userAnswer === CORRECT_ANSWER) {
                 feedback.style.color = "#00ff00";
                 feedback.innerText = "ACESSO CONCEDIDO. VOCÊ VENCEU.";
                 input.disabled = true;
-                document.querySelector('.level-image').style.filter = "grayscale(0%) brightness(1.2)";
+                if(levelImg) levelImg.style.filter = "grayscale(0%) brightness(1.2)";
             } else {
                 feedback.style.color = "#ff0000";
                 feedback.innerText = "ACESSO NEGADO. TENTE NOVAMENTE.";
-                // Pequeno efeito de tremor (opcional)
+                
+                // Efeito visual de erro
                 input.style.borderBottomColor = "#ff0000";
                 setTimeout(() => {
                     input.style.borderBottomColor = "#333";

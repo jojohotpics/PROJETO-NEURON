@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <!-- ⠍⠊⠝⠓⠁ ⠋⠕⠗⠍⠁ ⠙⠑ ⠑⠍⠃⠁⠗⠁⠇⠓⠁⠗ ⠕ ⠞⠑⠭⠞⠕ ⠑⠎ ⠍⠊⠝⠓⠁ ⠋⠁⠧⠕⠗⠊⠞⠁ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROJETO NEURON | Enigma</title>
@@ -10,7 +9,8 @@
             --bg-color: #0a0a0a;
             --accent-color: #ffffff;
             --text-dim: #888888;
-            --glitch-speed: 0.3s;
+            --error-color: #ff0000;
+            --success-color: #00ff00;
         }
 
         body, html {
@@ -30,6 +30,7 @@
         #home-screen {
             text-align: center;
             transition: opacity 1s ease;
+            z-index: 2;
         }
 
         .title {
@@ -81,6 +82,7 @@
             opacity: 0;
             transition: opacity 1s ease;
             width: 100%;
+            z-index: 2;
         }
 
         .level-image {
@@ -111,7 +113,7 @@
             width: 280px;
             text-align: center;
             outline: none;
-            transition: border-bottom 0.3s;
+            transition: all 0.3s;
         }
 
         input[type="text"]:focus {
@@ -121,9 +123,17 @@
         .feedback {
             margin-top: 20px;
             font-size: 0.7rem;
-            height: 20px;
+            min-height: 20px;
             letter-spacing: 2px;
             text-transform: uppercase;
+        }
+
+        /* Dica escondida (corrigida para ser visível apenas se selecionada) */
+        .hidden-hint {
+            color: #0b0b0b; /* Quase igual ao fundo */
+            font-size: 10px;
+            margin-top: 10px;
+            user-select: all; /* Facilita para o usuário encontrar */
         }
 
         /* Efeito de Scanline */
@@ -151,13 +161,17 @@
     </div>
 
     <div id="enigma-screen">
-        <img src="Primeiro-dos-cantos.jpeg" alt="file:///C:/Users/aluno/Desktop/Nova%20pasta%20(4)/gostodelertantoemportquantoemita.html" class="level-image">
+        <img src="Primeiro-dos-cantos.jpeg" alt="Enigma Visual" class="level-image">
         
         <div class="input-container">
             <input type="text" id="answerInput" placeholder="Sua resposta..." autocomplete="off">
         </div>
-        <div class="feedback" id="feedback">Aguardando entrada...<p style="color: black;">Menor que 63 e também não maior que 64</p></div>
+        
+        <div class="feedback" id="feedback">Aguardando entrada...</div>
+        
+        <p class="hidden-hint">Menor que 63 e também não maior que 64</p>
     </div>
+
     <script>
         const CORRECT_ANSWER = "silencio"; 
 
@@ -171,6 +185,7 @@
                 enigma.style.display = 'flex';
                 setTimeout(() => {
                     enigma.style.opacity = '1';
+                    document.getElementById('answerInput').focus(); // Foca no input automaticamente
                 }, 100);
             }, 1000);
         }
@@ -188,20 +203,39 @@
             const userAnswer = input.value.toLowerCase().trim();
             const levelImg = document.querySelector('.level-image');
             
-            if (userAnswer === CORRECT_ANSWER) {
+            // Remove acentos para facilitar (opcional, mas recomendado em enigmas)
+            const normalizedAnswer = userAnswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            if (normalizedAnswer === "silencio" || normalizedAnswer === "silêncio") {
                 feedback.style.color = "#00ff00";
-                feedback.innerText = "ACESSO CONCEDIDO. VOCÊ VENCEU.";
+                feedback.innerText = "ACESSO CONCEDIDO. REDIRECIONANDO...";
                 input.disabled = true;
-                if(levelImg) levelImg.style.filter = "grayscale(0%) brightness(1.2)";
+                
+                if(levelImg) {
+                    levelImg.style.filter = "grayscale(0%) brightness(1.2)";
+                    levelImg.style.boxShadow = "0 0 30px rgba(0, 255, 0, 0.4)";
+                }
+
+                setTimeout(() => {
+                    // Verifique se fase2.html existe no seu computador!
+                    window.location.href = "fase2.html"; 
+                }, 2000);
+
             } else {
                 feedback.style.color = "#ff0000";
                 feedback.innerText = "ACESSO NEGADO. TENTE NOVAMENTE.";
                 
-                // Efeito visual de erro
                 input.style.borderBottomColor = "#ff0000";
+                input.animate([
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(0)' }
+                ], { duration: 300 });
+
                 setTimeout(() => {
                     input.style.borderBottomColor = "#333";
-                }, 500);
+                }, 1000);
             }
         }
     </script>

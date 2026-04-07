@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJETO NEURON | Nível 2</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #ffffff;
+            --glitch-color: #ff003c;
+            --text-dim: #555555;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #enigma-container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 2s ease;
+        }
+
+        /* Identificador do Nível */
+        .level-header {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        /* Área da Imagem/Enigma */
+        .stage-box {
+            position: relative;
+            border: 1px solid #222;
+            padding: 40px;
+            margin-bottom: 30px;
+            background: linear-gradient(145deg, #0d0d0d, #111);
+        }
+
+        .braille-hint {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+
+        .main-cipher {
+            font-size: 2rem;
+            letter-spacing: 15px;
+            margin: 20px 0;
+            text-shadow: 0 0 8px rgba(255,255,255,0.2);
+        }
+
+        /* Input Estilizado */
+        .input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        input[type="text"] {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #222;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            padding: 10px;
+            width: 300px;
+            text-align: center;
+            outline: none;
+            text-transform: lowercase;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-bottom: 2px solid var(--accent-color);
+            letter-spacing: 2px;
+        }
+
+        .status-msg {
+            margin-top: 25px;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: #444;
+            height: 15px;
+        }
+
+        /* Efeito de ruído visual */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dica Escondida Visualmente */
+        .hidden-clue {
+            color: #0c0c0c; /* Quase invisível no fundo */
+            font-size: 10px;
+            margin-top: 50px;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="enigma-container">
+        <div class="level-header">NEURON_CORE // NÍVEL 02</div>
+
+        <div class="stage-box">
+            <div class="scanline"></div>
+            
+            <div class="braille-hint" title="Invisível aos olhos comuns">⠞⠑⠍⠓⠕</div>
+            
+            <div class="main-cipher" id="cipher">14 . 15 . 09 . 20 . 05</div>
+            
+            <p style="color: #666; font-size: 0.8rem;">"O que corre sem ter pernas e passa sem nunca voltar?"</p>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="text" id="ans" placeholder="DECIFRE" autocomplete="off">
+        </div>
+
+        <div class="status-msg" id="msg">SISTEMA AGUARDANDO COMANDO...</div>
+        
+        <div class="hidden-clue">A1...Z26</div>
+    </div>
+
+    <script>
+        // A resposta aqui seria "noite" (seguindo a lógica do enigma)
+        // Ou conforme o cipher 14.15.09.20.05 = NOITE
+        const KEY = "noite"; 
+
+        const input = document.getElementById('ans');
+        const msg = document.getElementById('msg');
+
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                if (input.value.toLowerCase().trim() === KEY) {
+                    msg.style.color = "#00ff00";
+                    msg.innerText = "NÍVEL 02 CONCLUÍDO. SINAPSE ATIVA.";
+                    input.disabled = true;
+                    input.style.borderBottomColor = "#00ff00";
+                    
+                    setTimeout(() => {
+                        alert("Você está pronto para o próximo nível?");
+                        // window.location.href = "nivel3.html"; 
+                    }, 1500);
+                } else {
+                    msg.style.color = "#ff003c";
+                    msg.innerText = "ERRO NA TRANSMISSÃO. TENTE NOVAMENTE.";
+                    
+                    // Shake effect
+                    input.style.transform = "translateX(10px)";
+                    setTimeout(() => input.style.transform = "translateX(-10px)", 50);
+                    setTimeout(() => input.style.transform = "translateX(0)", 100);
+                }
+            }
+        });
+
+        // Dica secreta no console (estilo Neuron Riddle)
+        console.log("%c DICA: A resposta é o que vem depois do pôr do sol.", "color: yellow; background: black; font-size: 15px");
+    </script>
+</body>
+</html>

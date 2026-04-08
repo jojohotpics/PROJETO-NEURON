@@ -139,7 +139,7 @@ cursor: default;
         <div class="stage-box">
             <div class="scanline"></div>
             
-            <div class="braille-hint" title="Tire a chuva do caderno preto">⠉⠓⠥⠧⠁ ⠕⠥ ⠎⠕⠇</div>
+            <div class="braille-hint" title="Tire a chuva do caderno preto japones">⠉⠓⠥⠧⠁ ⠕⠥ ⠎⠕⠇</div>
             
             <div class="main-cipher" id="cipher">14 . 15 . 09 . 20 . 05</div>
             

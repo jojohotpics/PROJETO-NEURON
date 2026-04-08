@@ -139,7 +139,7 @@ cursor: default;
         <div class="stage-box">
             <div class="scanline"></div>
             
-            <div class="braille-hint" title="Invisível aos olhos comuns">⠉⠓⠥⠧⠁ ⠕⠥ ⠎⠕⠇</div>
+            <div class="braille-hint" title="Tire a chuva do caderno">⠉⠓⠥⠧⠁ ⠕⠥ ⠎⠕⠇</div>
             
             <div class="main-cipher" id="cipher">14 . 15 . 09 . 20 . 05</div>
             
@@ -156,7 +156,7 @@ cursor: default;
     </div>
 
     <script>
-        const KEY = "clima_noturno"; 
+        const KEY = "light_yagami"; 
 
         const input = document.getElementById('ans');
         const msg = document.getElementById('msg');

@@ -117,12 +117,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Dica Escondidau Visalme*/nte 
+        /* Dica Escondida Visualmente */
+
         .hidden-clue {
-            color: #0c0c0c; 
-            font-size: 10px;
-            margin-top: 50px;
-            cursor: default;
+
+color: #0c0c0c; /* Quase invisível no fundo */
+
+font-size: 10px;
+
+margin-top: 50px;
+
+cursor: default;
         }
     </style>
 </head>
@@ -180,7 +185,7 @@
             }
         });
 
-        // Dica secreta no console (estilo Neuron Riddle)
+        // Dica secreta no console
         console.log("Horas minutos e segundos do que vem depois do pôr do sol.", "color: yellow; background: black; font-size: 15px");
     </script>
 </body>

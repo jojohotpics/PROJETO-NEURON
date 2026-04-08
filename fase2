@@ -117,9 +117,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Dica Escondida Visualmente */
+        /* Dica Escondidau Visalme*/nte 
         .hidden-clue {
-            color: #0c0c0c; /* Quase invisível no fundo */
+            color: #0c0c0c; 
             font-size: 10px;
             margin-top: 50px;
             cursor: default;
@@ -134,7 +134,7 @@
         <div class="stage-box">
             <div class="scanline"></div>
             
-            <div class="braille-hint" title="Invisível aos olhos comuns">⠞⠑⠍⠓⠕</div>
+            <div class="braille-hint" title="Invisível aos olhos comuns">⠉⠓⠥⠧⠁ ⠕⠥ ⠎⠕⠇</div>
             
             <div class="main-cipher" id="cipher">14 . 15 . 09 . 20 . 05</div>
             
@@ -151,9 +151,7 @@
     </div>
 
     <script>
-        // A resposta aqui seria "noite" (seguindo a lógica do enigma)
-        // Ou conforme o cipher 14.15.09.20.05 = NOITE
-        const KEY = "noite"; 
+        const KEY = "clima_noturno"; 
 
         const input = document.getElementById('ans');
         const msg = document.getElementById('msg');
@@ -183,7 +181,7 @@
         });
 
         // Dica secreta no console (estilo Neuron Riddle)
-        console.log("%c DICA: A resposta é o que vem depois do pôr do sol.", "color: yellow; background: black; font-size: 15px");
+        console.log("Horas minutos e segundos do que vem depois do pôr do sol.", "color: yellow; background: black; font-size: 15px");
     </script>
 </body>
 </html>
